@@ -34,7 +34,7 @@ public class Input extends Window{
 	
 	@Override
 	protected void initUI() {
-		
+
 		initLabels();
 		initTextFields();
 		initBtns();
