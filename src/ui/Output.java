@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import xProduction.Xproduction;
+import yProduction.Yproduction;
 
 public class Output extends Window{
 
@@ -23,10 +24,11 @@ public class Output extends Window{
 	 * 2 - parallelism
 	 * 3 - exclusiveness
 	 */
-	int [][] relationMatrix = new int[26][26];
+	int [][] relationMatrix;
 	Set<Character> Ti;
 	Set<Character> To;
 	Xproduction xProduction;
+	Yproduction yProduction;
 	
 	public Output(){
 		
@@ -42,6 +44,8 @@ public class Output extends Window{
 		Ti = new HashSet<>();
 		To = new HashSet<>();
 		xProduction = new Xproduction();
+		yProduction = new Yproduction();
+		relationMatrix = new int[26][26];
 		run();
 	}
 	
@@ -69,13 +73,14 @@ public class Output extends Window{
 		xProduction.goWork(relationMatrix);
 	}
 	private void prepareY(){
-		
+		yProduction.product(xProduction.set);
 	}
 	
 	private void prepareRelationMatrix(){
-		
+
 		for(int i = 0 ; i < inputArray.length; i++){
 			String element = inputArray[i];
+//			System.out.println(element);
 			for(int j = 0 ; j< element.length() - 1 ; j++){
 				if(relationMatrix[element.charAt(j)-'A'][element.charAt(j+1)-'A'] == 0){
 					relationMatrix[element.charAt(j)-'A'][element.charAt(j+1)-'A'] = 1;
@@ -91,6 +96,13 @@ public class Output extends Window{
 			for(int j =0 ; j<26; j++)
 				if(relationMatrix[i][j]==0)
 					relationMatrix[i][j]=3;
+		
+//		for(int i = 0; i < 26; i++){
+//			for(int j =0 ; j<26; j++)
+//				System.out.print(relationMatrix[i][j]+ " ");
+//			System.out.println();
+//		}
+				
 	}
 
 	@Override

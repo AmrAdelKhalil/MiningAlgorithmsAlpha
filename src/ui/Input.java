@@ -120,6 +120,7 @@ public class Input extends Window{
 		 textArea.setColumns(30);
 		 textArea.setRows(25);
 		 textArea.setEditable(false);
+		 textArea.setText("ABDEH\nADCEG\nACDEFBDEG\nADBEH\nACDEFDCEFCDEH\nACDEG");//remove this
 		 initScroll();
 	}
 	
