@@ -10,6 +10,8 @@ import java.util.Set;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
+import xProduction.Xproduction;
+
 public class Output extends Window{
 
 	String []inputArray;
@@ -24,6 +26,7 @@ public class Output extends Window{
 	int [][] relationMatrix = new int[26][26];
 	Set<Character> Ti;
 	Set<Character> To;
+	Xproduction xProduction;
 	
 	public Output(){
 		
@@ -38,6 +41,7 @@ public class Output extends Window{
 		setVisible(true);
 		Ti = new HashSet<>();
 		To = new HashSet<>();
+		xProduction = new Xproduction();
 		run();
 	}
 	
@@ -62,7 +66,7 @@ public class Output extends Window{
 			To.add(inputArray[i].charAt(inputArray[i].length()-1));
 	}
 	private void prepareX(){
-		
+		xProduction.goWork(relationMatrix);
 	}
 	private void prepareY(){
 		
