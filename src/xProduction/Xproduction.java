@@ -38,43 +38,46 @@ public class Xproduction {
 						p = new Pair();
 						p.left = c1;
 						p.right = c2;
-						//System.out.println(checkCaus(c1,c2) + " "+i + " "+j);
 						if(checkCaus(c1,c2) && notExits(set, p)){
-//							for(int  k = 0 ; k < p.left.size(); k++)
-//								System.out.println(p.left.get(k));
-//
-//							for(int  k = 0 ; k < p.right.size(); k++)
-//								System.out.println(p.right.get(k));
-//							
-//							System.out.println("yes");
+
 							set.add(p.deepCopy());
 						}
 					}
 				}
 			}
-//			printSet(set);
-//			System.out.println(set.size() + " "+lastSize);
-//			if(start>22)
-//			break;
+
 		}
-//		System.out.println(set.size());
-//		System.out.println("3mltha walla a");
+		printSet(set);
 
 	}
 	
 	private void printSet(ArrayList<Pair> set){
 		
+		System.out.println("Xw:");
+		System.out.print("{");
 		for(int i= 0 ; i < set.size(); i++){
+			System.out.print("({");
+			
 			for(int j = 0 ; j <set.get(i).left.size(); j++){
-				System.out.print(set.get(i).left.get(j)+ ",");
+				System.out.print(set.get(i).left.get(j));
+				if(j<set.get(i).left.size()-1)
+					System.out.print(",");
 			}
-			System.out.println();
+			System.out.print("},{");
 			for(int j = 0 ; j <set.get(i).right.size(); j++){
-				System.out.print(set.get(i).right.get(j)+ ",");
+				System.out.print(set.get(i).right.get(j));
+				if(j<set.get(i).right.size()-1)
+					System.out.print(",");
 			}
-			System.out.println();
-			System.out.println("***********************");
+			System.out.print("}");
+			System.out.print(")");
+			if(i < set.size() -1)
+				System.out.print(",");
+			if(i%10 == 0 && i != 0)
+				System.out.println();
 		}
+		System.out.println("}");
+		System.out.println("-----------------------------------");
 	}
 	
 	private boolean notExits(ArrayList<Pair> newSets, Pair p){

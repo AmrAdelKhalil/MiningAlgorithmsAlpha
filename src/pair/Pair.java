@@ -6,6 +6,7 @@ public class Pair {
 	
 	public ArrayList<Character> left = new ArrayList();
 	public ArrayList<Character> right = new ArrayList<>();
+	
 	public Pair deepCopy(){
 		
 		Pair p = new Pair();
@@ -17,5 +18,15 @@ public class Pair {
 			p.right.add(new Character(right.get(i)));
 		
 		return p;
+	}
+	
+	public Pair put(Character input, Character firstHead){
+		left = new ArrayList<>();
+		right = new ArrayList<>();
+		
+		left.add(input);
+		right.add(firstHead);
+		
+		return this;
 	}
 }

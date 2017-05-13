@@ -3,13 +3,14 @@ package ui;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
+import pProduction.Pproduction;
 import xProduction.Xproduction;
 import yProduction.Yproduction;
 
@@ -29,6 +30,7 @@ public class Output extends Window{
 	Set<Character> To;
 	Xproduction xProduction;
 	Yproduction yProduction;
+	Pproduction pProduction;
 	
 	public Output(){
 		
@@ -45,6 +47,7 @@ public class Output extends Window{
 		To = new HashSet<>();
 		xProduction = new Xproduction();
 		yProduction = new Yproduction();
+		pProduction = new Pproduction();
 		relationMatrix = new int[26][26];
 		run();
 	}
@@ -57,23 +60,53 @@ public class Output extends Window{
 		prepareTo();
 		prepareX();
 		prepareY();
+		prepareP();
 	}
-	
+
 	private void prepareTi(){
 		for(int i = 0 ; i<inputArray.length; i++)
 			Ti.add(inputArray[i].charAt(0));
+		
+		Iterator iterator = Ti.iterator(); 
+		
+		System.out.println("Ti:");
+		System.out.print("{");
+		while (iterator.hasNext()){
+		   System.out.print(iterator.next()); 
+		   if(iterator.hasNext()){
+			   System.out.print(", ");
+		   }
+		}
+		System.out.println("}");
+		System.out.println("-----------------------------------");
 		//to iterate on HashSet
 		//https://www.tutorialspoint.com/java/util/hashset_iterator.htm
 	}
 	private void prepareTo(){
 		for(int i = 0 ; i<inputArray.length; i++)
 			To.add(inputArray[i].charAt(inputArray[i].length()-1));
+		
+		Iterator iterator = To.iterator(); 
+		
+		System.out.println("To:");
+		System.out.print("{");
+		while (iterator.hasNext()){
+		   System.out.print(iterator.next()); 
+		   if(iterator.hasNext()){
+			   System.out.print(", ");
+		   }
+		}
+		System.out.println("}");
+		System.out.println("-----------------------------------");
 	}
 	private void prepareX(){
 		xProduction.goWork(relationMatrix);
 	}
 	private void prepareY(){
 		yProduction.product(xProduction.set);
+	}
+	private void prepareP() {
+		pProduction.product(yProduction.filtered, Ti, To);
 	}
 	
 	private void prepareRelationMatrix(){
