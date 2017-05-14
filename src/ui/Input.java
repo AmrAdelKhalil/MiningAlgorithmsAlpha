@@ -120,7 +120,8 @@ public class Input extends Window{
 		 textArea.setColumns(30);
 		 textArea.setRows(25);
 		 textArea.setEditable(false);
-		 textArea.setText("ABDEH\nADCEG\nACDEFBDEG\nADBEH\nACDEFDCEFCDEH\nACDEG");//remove this
+//		 textArea.setText("ABDEH\nADCEG\nACDEFBDEG\nADBEH\nACDEFDCEFCDEH\nACDEG");//remove this
+		 textArea.setText("ABHIJG\nABIHJG\nACDEG\nACDFDEG");
 		 initScroll();
 	}
 	
@@ -131,11 +132,14 @@ public class Input extends Window{
 	
 	@Override
 	protected void run() {
-		this.setVisible(false);
 		
 		String []inputArray = textArea.getText().split("\n");
-		
-		Window output = new Output(inputArray);
+
+		Window output = null;
+		if(textArea.getText().length()> 0){
+			this.setVisible(false);
+			output = new Output(inputArray);
+		}
 		
 	}
 	

@@ -8,29 +8,18 @@ import pair.Pair;
 
 public class Pproduction {
 	
-	ArrayList<Pair> p;
+	public ArrayList<Pair> p;
+	public ArrayList<String> places;
 	
-	public void product(ArrayList<Pair> filtered, Set<Character> ti, Set<Character> to) {
+	public void product(ArrayList<Pair> filtered) {
 		p = new ArrayList<>();
-		
+		places = new ArrayList<>();
+
 		for(int i= 0 ; i < filtered.size(); i++){
 			p.add(filtered.get(i).deepCopy());
 		}
 		
-		Pair pair = new Pair();
-		
-		Iterator iterator = ti.iterator(); 
-		
-		while (iterator.hasNext()){
-		   p.add(new Pair().put('I',(Character)iterator.next()));
-		}
-		
 
-		iterator = to.iterator(); 
-		
-		while (iterator.hasNext()){
-			p.add(new Pair().put((Character)iterator.next(),'O'));
-		}
 		printSet(p);
 		
 	}
@@ -38,27 +27,28 @@ public class Pproduction {
 		
 		System.out.println("Pw:");
 		System.out.print("{");
+		String place = "";
 		for(int i= 0 ; i < set.size(); i++){
-			System.out.print("({");
-			
+			place = "";
+			System.out.print("p(");
+			place += "p(";
 			for(int j = 0 ; j <set.get(i).left.size(); j++){
 				System.out.print(set.get(i).left.get(j));
-				if(j<set.get(i).left.size()-1)
-					System.out.print(",");
+				place += set.get(i).left.get(j);
 			}
-			System.out.print("},{");
+			System.out.print(",");
+			place += ",";
 			for(int j = 0 ; j <set.get(i).right.size(); j++){
 				System.out.print(set.get(i).right.get(j));
-				if(j<set.get(i).right.size()-1)
-					System.out.print(",");
+				place += set.get(i).right.get(j);
 			}
-			System.out.print("}");
 			System.out.print(")");
+			place += ")";
 			if(i < set.size() -1)
 				System.out.print(",");
-			if(i%10 == 0 && i != 0)
-				System.out.println();
+			places.add(place);
 		}
+		System.out.print(",p(i),p(o)");
 		System.out.println("}");
 		System.out.println("-----------------------------------");
 	}

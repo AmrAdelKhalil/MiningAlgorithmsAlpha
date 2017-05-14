@@ -9,9 +9,11 @@ import java.util.Set;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 import pProduction.Pproduction;
 import xProduction.Xproduction;
+import yProduction.Fproduction;
 import yProduction.Yproduction;
 
 public class Output extends Window{
@@ -31,6 +33,8 @@ public class Output extends Window{
 	Xproduction xProduction;
 	Yproduction yProduction;
 	Pproduction pProduction;
+	Fproduction fProduction;
+	JLabel message;
 	
 	public Output(){
 		
@@ -38,6 +42,7 @@ public class Output extends Window{
 	
 	public Output(String []inputArray){
 		this.inputArray = inputArray;
+		message = new JLabel("Look at the console to see the result");
 		setLayout( new FlowLayout() );
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize( 400, 700 );
@@ -48,6 +53,7 @@ public class Output extends Window{
 		xProduction = new Xproduction();
 		yProduction = new Yproduction();
 		pProduction = new Pproduction();
+		fProduction = new Fproduction();
 		relationMatrix = new int[26][26];
 		run();
 	}
@@ -61,6 +67,7 @@ public class Output extends Window{
 		prepareX();
 		prepareY();
 		prepareP();
+		prepareF();
 	}
 
 	private void prepareTi(){
@@ -79,8 +86,7 @@ public class Output extends Window{
 		}
 		System.out.println("}");
 		System.out.println("-----------------------------------");
-		//to iterate on HashSet
-		//https://www.tutorialspoint.com/java/util/hashset_iterator.htm
+		
 	}
 	private void prepareTo(){
 		for(int i = 0 ; i<inputArray.length; i++)
@@ -105,15 +111,18 @@ public class Output extends Window{
 	private void prepareY(){
 		yProduction.product(xProduction.set);
 	}
-	private void prepareP() {
-		pProduction.product(yProduction.filtered, Ti, To);
+	private void prepareP(){
+		pProduction.product(yProduction.filtered);
+	}
+	private void prepareF(){
+		fProduction.product(pProduction.p, Ti, To, pProduction.places);
 	}
 	
 	private void prepareRelationMatrix(){
 
 		for(int i = 0 ; i < inputArray.length; i++){
 			String element = inputArray[i];
-//			System.out.println(element);
+
 			for(int j = 0 ; j< element.length() - 1 ; j++){
 				if(relationMatrix[element.charAt(j)-'A'][element.charAt(j+1)-'A'] == 0){
 					relationMatrix[element.charAt(j)-'A'][element.charAt(j+1)-'A'] = 1;
@@ -130,11 +139,7 @@ public class Output extends Window{
 				if(relationMatrix[i][j]==0)
 					relationMatrix[i][j]=3;
 		
-//		for(int i = 0; i < 26; i++){
-//			for(int j =0 ; j<26; j++)
-//				System.out.print(relationMatrix[i][j]+ " ");
-//			System.out.println();
-//		}
+
 				
 	}
 
@@ -148,6 +153,7 @@ public class Output extends Window{
 				getBack();
 			}
 		});
+		add(message);
 		add(next_prev_btn);
 	}
 	

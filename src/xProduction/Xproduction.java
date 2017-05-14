@@ -119,13 +119,6 @@ public class Xproduction {
 	}
 	
 	private boolean checkExclu(ArrayList<Character> a1, ArrayList<Character> a2){
-//		for(int  k = 0 ; k < a1.size(); k++)
-//			System.out.println(a1.get(k));
-//		System.out.println("------------------");
-//		for(int  k = 0 ; k < a2.size(); k++)
-//			System.out.println(a2.get(k));
-//		System.out.println("*****************"+" "+relationMatrix[a1.get(0)-'A'][a2.get(0)-'A']);
-//		
 		
 		for(int i=0 ; i < a1.size(); i++){
 			for(int j=0 ; j<a2.size() ; j++){
